@@ -3,8 +3,9 @@ const SELECTORS = {
         ALERT_TITLE: '*//android.widget.TextView[@resource-id="android:id/alertTitle"]',
         ALERT_MESSAGE: '*//android.widget.TextView[@resource-id="android:id/message"]',
         ALERT_BUTTON: '*//android.widget.Button[@text="{BUTTON_TEXT}"]',
-        ALERT_INVALID_PASS:'//android.widget.ScrollView[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[2]',
-        ALERT_INVALID_EMAIL: '//android.widget.ScrollView[@content-desc="Login-screen"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.TextView[1]',
+        ALERT_INVALID_PASS: '//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[2]',
+        ALERT_INVALID_EMAIL: '//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[1]'
+       
     },
         
     IOS: {
@@ -29,27 +30,7 @@ class NativeAlert {
         });
     }
 
-    static async waitForPassMessageIsShown (isShown = true) {
-        const selector = driver.isAndroid
-            ? SELECTORS.ANDROID.ALERT_INVALID_PASS
-            : SELECTORS.IOS.ALERT;
-
-        return $(selector).waitForExist({
-            timeout: 11000,
-            reverse: !isShown,
-        });
-    }
-
-    static async waitForEmailMessageIsShown (isShown = true) {
-        const selector = driver.isAndroid
-            ? SELECTORS.ANDROID.ALERT_INVALID_EMAIL
-            : SELECTORS.IOS.ALERT;
-
-        return $(selector).waitForExist({
-            timeout: 11000,
-            reverse: !isShown,
-        });
-    }
+      
 
     /**
      * Press a button in a cross-platform way.
@@ -82,23 +63,10 @@ class NativeAlert {
             return driver.getAlertText();
         }
 
-        return `${await $(SELECTORS.ANDROID.ALERT_TITLE).getText()},${await $(SELECTORS.ANDROID.ALERT_INVALID_PASS).getText()}\n${await $(SELECTORS.ANDROID.ALERT_MESSAGE).getText()}`;
+        return `${await $(SELECTORS.ANDROID.ALERT_TITLE).getText()}\n${await $(SELECTORS.ANDROID.ALERT_MESSAGE).getText()}`;
     }
-    static async PassMessageText ():Promise<string> {
-        if (driver.isIOS) {
-            return driver.getAlertText();
-        }
-
-        return `${await $(SELECTORS.ANDROID.ALERT_INVALID_PASS).getText()}`;
-    }
-
-    static async EmailMessageText ():Promise<string> {
-        if (driver.isIOS) {
-            return driver.getAlertText();
-        }
-
-        return `${await $(SELECTORS.ANDROID.ALERT_INVALID_EMAIL).getText()}`;
-    }
+    
+  
 
 }
 
