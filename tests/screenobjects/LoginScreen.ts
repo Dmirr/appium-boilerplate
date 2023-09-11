@@ -54,10 +54,10 @@ class LoginScreen extends AppScreen {
         await this.loginButton.click();
     }
 
-    async submitSignUpForm({ username, password }:{username:string; password:string;}) {
+    async submitSignUpForm({ username, password, password2 }:{username:string; password:string; password2:string;}) {
         await this.email.setValue(username);
         await this.password.setValue(password);
-        await this.repeatPassword.setValue(password);
+        await this.repeatPassword.setValue(password2);
 
         if (await driver.isKeyboardShown()) {
             /**

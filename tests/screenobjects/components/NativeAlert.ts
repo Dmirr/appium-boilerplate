@@ -4,7 +4,7 @@ const SELECTORS = {
         ALERT_MESSAGE: '*//android.widget.TextView[@resource-id="android:id/message"]',
         ALERT_BUTTON: '*//android.widget.Button[@text="{BUTTON_TEXT}"]',
         ALERT_INVALID_PASS: '//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[2]',
-        ALERT_INVALID_EMAIL: '//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[1]'
+        ALERT_INVALID_EMAIL: '//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[3]'
        
     },
         

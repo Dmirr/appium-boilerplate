@@ -1,7 +1,7 @@
 const SELECTORS = {
  ANDROID: {
  ALERT_INVALID_PASS: '*//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[2]',
- ALERT_INVALID_EMAIL: '*//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[1]'
+ ALERT_INVALID_PASS2: '*//android.widget.ScrollView[@content-desc="Login-screen"]//android.widget.TextView[3]'
  },
 
  IOS: {
@@ -23,9 +23,9 @@ static async waitForPassMessageIsShown (isShown = true) {
     });
 }
 
-static async waitForEmailMessageIsShown (isShown = true) {
+static async waitForNotSamePassIsShown (isShown = true) {
     const selector = driver.isAndroid
-        ? SELECTORS.ANDROID.ALERT_INVALID_EMAIL
+        ? SELECTORS.ANDROID.ALERT_INVALID_PASS2
         : SELECTORS.IOS.ALERT;
 
     return $(selector).waitForExist({
@@ -41,12 +41,12 @@ static async PassMessageText ():Promise<string> {
     return `${await $(SELECTORS.ANDROID.ALERT_INVALID_PASS).getText()}`;
 }
 
-static async EmailMessageText ():Promise<string> {
+static async NotSamePassText ():Promise<string> {
     if (driver.isIOS) {
         return driver.getAlertText();
     }
 
-    return `${await $(SELECTORS.ANDROID.ALERT_INVALID_EMAIL).getText()}`;
+    return `${await $(SELECTORS.ANDROID.ALERT_INVALID_PASS2).getText()}`;
 }
 
 }
